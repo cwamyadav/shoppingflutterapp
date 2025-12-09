@@ -11,6 +11,9 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   dynamic _image;
+  dynamic _categoryBannerImage;
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  late String categoryName;
   pickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
@@ -23,125 +26,167 @@ class _CategoryScreenState extends State<CategoryScreen> {
     }
   }
 
+  pickCategoryImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+    if (result != null) {
+      setState(() {
+        _categoryBannerImage = result.files.first.bytes;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(
-              'Categories',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30),
-            ),
-          ],
-        ),
-        Padding(
-          padding: EdgeInsets.all(4.0),
-          child: Divider(
-            color: Colors.grey,
-            thickness: 1,
-            height: 1,
-          ),
-        ),
-        // category image, categoryname, cancel save buton
-        Row(
-          children: [
-            SizedBox(
-              width: 20,
-            ),
-            Column(
-              children: [
-                Container(
-                  height: 150,
-                  width: 150,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(5)),
-                  child:_image!=null?Image.memory(_image): Text('Category Image'),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                
-                ElevatedButton(
-                    onPressed: () {
-                      pickImage();
-                    },
-                    child: Text('Pick Image')),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: SizedBox(
-                width: 180,
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(hintText: 'Enter Category name'),
-                ),
+    return Form(
+      key: _formkey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                'Categories',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),
               ),
-            ),
-            TextButton(onPressed: () {}, child: Text('Cancel')),
-            SizedBox(
-              width: 10,
-            ),
-            ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(Colors.deepPurple),
-                  foregroundColor: WidgetStateProperty.all(Colors.white),
-                ),
-                onPressed: () {},
-                child: Text('Submit')),
-          ],
-        ),
-        Padding(
-          padding: EdgeInsets.all(4.0),
-          child: Divider(
-            color: Colors.grey,
-            thickness: 1,
-            height: 1,
+            ],
           ),
-        ),
-        Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  'Category',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30),
-                )
-              ],
+          Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Divider(
+              color: Colors.grey,
+              thickness: 1,
+              height: 1,
             ),
-            Row(
-              children: [
-                // SizedBox(
-                //   width: 20,
-                // ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  height: 150,
-                  width: 150,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Text(
-                    'Category Image',
+          ),
+          // category image, categoryname, cancel save buton
+          Row(
+            children: [
+              SizedBox(
+                width: 20,
+              ),
+              Column(
+                children: [
+                  Container(
+                    height: 150,
+                    width: 150,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: _image != null
+                        ? Image.memory(_image)
+                        : Text('Category Image'),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        pickImage();
+                      },
+                      child: Text('Pick Image')),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: SizedBox(
+                  width: 180,
+                  child: TextFormField(
+                    onChanged: (value) {
+                      categoryName = value;
+                    },
+                    validator: (value) {
+                      if (value!.isNotEmpty) {
+                        return null;
+                      } else {
+                        return "Please enter category name";
+                      }
+                    },
+                    textAlign: TextAlign.center,
+                    decoration:
+                        InputDecoration(hintText: 'Enter Category name'),
                   ),
                 ),
-                // Image.asset('assets/images/')
-              ],
-            )
-          ],
-        )
-      ],
+              ),
+              TextButton(onPressed: () {}, child: Text('Cancel')),
+              SizedBox(
+                width: 10,
+              ),
+              ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(Colors.deepPurple),
+                    foregroundColor: WidgetStateProperty.all(Colors.white),
+                  ),
+                  onPressed: () {
+                    if (_formkey.currentState!.validate()) {
+                      print(categoryName);
+                    } else {}
+                  },
+                  child: Text('save')),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Divider(
+              color: Colors.grey,
+              thickness: 1,
+              height: 1,
+            ),
+          ),
+          Column(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    'Category',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30),
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  // SizedBox(
+                  //   width: 20,
+                  // ),
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        height: 150,
+                        width: 150,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: _categoryBannerImage != null
+                            ? Image.memory(_categoryBannerImage)
+                            : Text(
+                                'Category Banner',
+                              ),
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            pickCategoryImage();
+                          },
+                          child: Text('Pick Image')),
+                    ],
+                  ),
+                  // Image.asset('assets/images/')
+                ],
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }

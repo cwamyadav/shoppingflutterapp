@@ -215,7 +215,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         // );
                         registerUser();
 
-                        print('correct');
+                        // print('correct');
 
                         print({email, password, fullname});
                       } else {
