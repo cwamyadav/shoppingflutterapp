@@ -1,0 +1,114 @@
+# =====================================================
+# ROOT PROJECT GITIGNORE (Flutter + Node.js structure)
+# =====================================================
+
+# ----------------------------
+# FLUTTER (Frontend folder)
+# ----------------------------
+frontend/.dart_tool/
+frontend/.packages
+frontend/.pub/
+frontend/build/
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/.generated/
+frontend/flutter_export_environment.sh
+
+# iOS
+frontend/ios/Pods/
+frontend/ios/.symlinks/
+frontend/ios/Flutter/
+frontend/ios/xcuserdata/
+frontend/ios/Runner/GeneratedPluginRegistrant.*
+
+# Android
+frontend/android/.gradle/
+frontend/android/.idea/
+frontend/android/local.properties
+frontend/android/app/debug/
+frontend/android/app/profile/
+frontend/android/app/release/
+frontend/android/key.properties
+
+# Firebase keys
+frontend/android/app/google-services.json
+frontend/ios/Runner/GoogleService-Info.plist
+
+# Environment
+frontend/assets/configs/.env
+# ----------------------------
+# FLUTTER (Web App folder)
+# ----------------------------
+web_app/.dart_tool/
+web_app/.packages
+web_app/.pub/
+web_app/build/
+web_app/.flutter-plugins
+web_app/.flutter-plugins-dependencies
+web_app/.generated/
+web_app/flutter_export_environment.sh
+
+# iOS (if any)
+web_app/ios/Pods/
+web_app/ios/.symlinks/
+web_app/ios/Flutter/
+web_app/ios/xcuserdata/
+web_app/ios/Runner/GeneratedPluginRegistrant.*
+
+# Android (if any)
+web_app/android/.gradle/
+web_app/android/.idea/
+web_app/android/local.properties
+web_app/android/app/debug/
+web_app/android/app/profile/
+web_app/android/app/release/
+web_app/android/key.properties
+
+# Firebase keys
+web_app/android/app/google-services.json
+web_app/ios/Runner/GoogleService-Info.plist
+
+# Environment
+web_app/assets/configs/.env
+# ----------------------------
+# NODE.JS (Backend folder)
+# ----------------------------
+backend/node_modules/
+backend/logs/
+backend/*.log
+backend/npm-debug.log*
+backend/yarn-debug.log*
+backend/yarn-error.log*
+
+# Environment / Secret files
+backend/.env
+backend/.env.local
+backend/.env.development
+backend/.env.production
+backend/.env.test
+
+# Build / Cache
+backend/dist/
+backend/.cache/
+backend/.tmp/
+backend/coverage/
+
+# Database / Private data
+backend/*.sqlite
+backend/*.db
+backend/*.sql
+backend/private_data/
+backend/config/private/
+
+# ----------------------------
+# GLOBAL (Both frontend & backend)
+# ----------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.lock
+
+# IDE / Editor settings
+.vscode/
+.idea/
