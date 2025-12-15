@@ -5,7 +5,8 @@ import 'package:web_app/view/sidebar_screens/buyer_screen.dart';
 import 'package:web_app/view/sidebar_screens/category_screen.dart';
 import 'package:web_app/view/sidebar_screens/orders_screen.dart';
 import 'package:web_app/view/sidebar_screens/products_screen.dart';
-import 'package:web_app/view/sidebar_screens/upload_banner_screen.dart';
+import 'package:web_app/view/sidebar_screens/subcategory_screen.dart';
+import 'package:web_app/view/sidebar_screens/upload_banner.dart';
 import 'package:web_app/view/sidebar_screens/vendors_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  Widget _selectedScreen = CategoryScreen();
+  Widget _selectedScreen = UploadBannerScreen();
 
   screenSelectRoute(item) {
     setState(() {
@@ -30,6 +31,8 @@ class _MainScreenState extends State<MainScreen> {
         case OrderScreen.id:
           _selectedScreen = OrderScreen();
           break;
+        case SubcategoryScreen.id:
+          _selectedScreen = SubcategoryScreen();
         case ProductScreen.id:
           _selectedScreen = ProductScreen();
           break;
@@ -79,13 +82,17 @@ class _MainScreenState extends State<MainScreen> {
                 route: CategoryScreen.id,
                 icon: Icons.category),
             AdminMenuItem(
+                title: 'SubCategories',
+                route: SubcategoryScreen.id,
+                icon: Icons.category_outlined),
+            AdminMenuItem(
                 title: 'Upload Banner',
                 route: UploadBannerScreen.id,
                 icon: Icons.upload),
             AdminMenuItem(
                 title: 'Products', route: ProductScreen.id, icon: Icons.store),
           ],
-          selectedRoute: CategoryScreen.id,
+          selectedRoute: BuyerScreen.id,
           onSelected: (item) {
             screenSelectRoute(item);
           }),

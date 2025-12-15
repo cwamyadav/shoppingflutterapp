@@ -1,7 +1,7 @@
 const express=require('express');
 const Category=require('../models/category');
 const categoryRouter=express.Router();
-categoryRouter.post('/api/category/', async(req,res)=>{
+categoryRouter.post('/api/categories/', async(req,res)=>{
     try{
         const {name, image, banner}=req.body;
         const category=new Category({name, image, banner});
@@ -11,4 +11,19 @@ categoryRouter.post('/api/category/', async(req,res)=>{
         res.status(500).json({error:e.message});
     }
 });
-module.exports=categoryRouter;
+
+// Route: Get all categories
+categoryRouter.get('/api/categories/', async (req, res) => {
+    try {
+        // Fetch all category documents from the database
+        const categories = await Category.find();
+
+        // Send the list of categories with a success status
+        return res.status(200).send(categories);
+    } catch (e) {
+        // Send error response if something goes wrong
+        return res.status(500).json({ error: e.message });
+    }
+});
+
+module.exports=categoryRouter; 

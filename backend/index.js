@@ -8,6 +8,7 @@ const categoryRouter=require('./routes/category');
 const subcategoriesRouter=require('./routes/sub_category');
 const productRouter=require('./routes/product');
 const productReviewRouter=require('./routes/product_review');
+const cors=require('cors');
 require('dotenv').config();
 // defined the port 
 const PORT= process.env.PORT || 3000;
@@ -26,6 +27,7 @@ mongoose.connect(DB).then(()=>{
     console.log('MongoDb connected');
 });
 // seprate route is called
+app.use(cors());// enable cors for all routes and origin
 app.use(helloroute);
 app.use(authRouter);
 app.use(bannerRouter);

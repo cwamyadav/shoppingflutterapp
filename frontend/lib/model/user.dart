@@ -51,8 +51,6 @@ class User {
     );
   }
 
-  // fromjson: this factory constructor takes json string, and decodes into a Map<STring, dynamic>
-  // and then uses fromMap to convert that map into a object
   factory User.fromJson(String source) =>
       User.fromMap(jsonDecode(source) as Map<String, dynamic>);
 }

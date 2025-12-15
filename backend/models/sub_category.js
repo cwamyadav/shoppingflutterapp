@@ -20,3 +20,8 @@ categoryName:{
 
 const SubCategory=mongoose.model("SubCategory", subCategorySchema);
 module.exports=SubCategory;
+// id
+// categoryname 
+// categoryid
+// image 
+// subcategoryname

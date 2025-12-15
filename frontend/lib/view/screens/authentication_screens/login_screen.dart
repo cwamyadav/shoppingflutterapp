@@ -15,14 +15,14 @@ class _LoginScreenState extends State<LoginScreen> {
   late String email;
   late String password;
   bool isloading = false;
-  void loginUser() async {
+  Future<void> loginUser() async {
     setState(() {
       isloading = true;
     });
     await _authController
         .signinUser(context: context, email: email, password: password)
         .whenComplete(() {
-      // _formKey.currentState!.reset();
+      _formKey.currentState!.reset();
       setState(() {
         isloading = false;
       });
@@ -155,11 +155,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   InkWell(
                     onTap: () async {
                       if (_formKey.currentState!.validate()) {
-                        // await _authController.signinUser(
-                        //   context: context,
-                        //   email: email,
-                        //   password: password,
-                        // );
                         loginUser();
                         print('pass ');
                       } else {

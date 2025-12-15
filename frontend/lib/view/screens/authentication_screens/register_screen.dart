@@ -207,16 +207,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   InkWell(
                     onTap: () async {
                       if (_formkey.currentState!.validate()) {
-                        // await _authController.signupUser(
-                        //   context: context,
-                        //   email: email,
-                        //   fullname: fullname,
-                        //   password: password,
-                        // );
                         registerUser();
-
                         // print('correct');
-
                         print({email, password, fullname});
                       } else {
                         print('failed');
@@ -236,13 +228,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         alignment: Alignment.center,
                         child: isloading
                             ? CircularProgressIndicator()
-                            : Text('Sign up',
+                            : Text(
+                                'Sign up',
                                 style: GoogleFonts.getFont(
                                   'Lato',
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
-                                )),
+                                ),
+                              ),
                       ),
                     ),
                   ),

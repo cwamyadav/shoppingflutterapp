@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:forntend/view/screens/authentication_screens/login_screen.dart';Future<void> main() async {
-  await dotenv.load(fileName: "assets/configs/.env"); // load environment variables
+import 'package:forntend/view/screens/authentication_screens/login_screen.dart';
+
+Future<void> main() async {
+  await dotenv.load(
+      fileName: "assets/configs/.env");// load environment variables
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -21,5 +23,4 @@ class MyApp extends StatelessWidget {
       home: LoginScreen(),
     );
   }
-  
 }

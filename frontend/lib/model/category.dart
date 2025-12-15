@@ -35,8 +35,4 @@ class Category {
       banner: map['banner'] as String, // extract banner field from map
     );
   }
-
-  // Convert JSON string to Category object (optional older version)
-  // factory Category.fromJson(String source) =>
-  //     Category.fromMap(json.decode(source));
 }
