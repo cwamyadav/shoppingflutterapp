@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:forntend/controller/sub_category_controller.dart';
 import 'package:forntend/model/category.dart';
-import 'package:forntend/model/sub_category.dart';
-import 'package:forntend/view/screens/authentication_screens/detail/screen/widget/inner_banner_widget.dart';
-import 'package:forntend/view/screens/authentication_screens/detail/screen/widget/inner_header_widget.dart';
-import 'package:forntend/view/screens/authentication_screens/detail/screen/widget/subcategory_tile_widget.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:forntend/view/screens/authentication_screens/detail/screen/widget/inner_content_widget.dart';
+import 'package:forntend/view/screens/authentication_screens/nav_screen/cart_screen.dart';
+import 'package:forntend/view/screens/authentication_screens/nav_screen/category_screen.dart';
+import 'package:forntend/view/screens/authentication_screens/nav_screen/favorite_screen.dart';
+import 'package:forntend/view/screens/authentication_screens/nav_screen/store_screen.dart';
+import 'package:forntend/view/screens/authentication_screens/nav_screen/user_screen.dart';
 
 class InnerCategoryScreen extends StatefulWidget {
   final Category category;
@@ -16,105 +16,55 @@ class InnerCategoryScreen extends StatefulWidget {
 }
 
 class _InnerCategoryScreenState extends State<InnerCategoryScreen> {
-  late Future<List<SubCategory>> futureSubCategories;
-
-  @override
-  void initState() {
-    super.initState();
-    futureSubCategories = SubCategoryController()
-        .loadSubCategorybyCategoryName(widget.category.name);
-  }
-
+  int pageIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize:
-            Size.fromHeight(MediaQuery.of(context).size.height * 0.20),
-        child: InnerHeaderWidget(),
+    List<Widget> pages = [
+      InnerCategoryContentWidget(
+        category: widget.category,
       ),
-      body: Column(
-        children: [
-          InnerBannerWidget(image: widget.category.image),
-          Center(
-            child: Text(
-              'Shop by Subcategories',
-              style: GoogleFonts.quicksand(
-                fontSize: 19,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.7,
+      FavoriteScreen(),
+      CategoryScreen(),
+      StoreScreen(),
+      CartScreen(),
+      UserScreen(),
+    ];
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.purple,
+        unselectedItemColor: Colors.grey,
+        currentIndex: pageIndex,
+        onTap: (value) {
+          setState(() {
+            pageIndex = value;
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+              icon: Image.asset('assets/icons/home.png', width: 25),
+              label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Image.asset('assets/icons/love.png', width: 25),
+              label: "favroite"),
+          BottomNavigationBarItem(
+              icon: Image.asset('assets/icons/mart.png', width: 25),
+              label: 'Category'),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/icons/mart.png',
+                width: 25,
               ),
-            ),
-          ),
-          // aim: find the subcategory by name(which click at main screen),
-          Expanded(
-            child: FutureBuilder(
-              future: futureSubCategories,
-              builder: (context, snapshot) {
-                // waiting
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                // error
-                else if (snapshot.hasError) {
-                  return Center(
-                    child: Text('Error:${snapshot.error}'),
-                  );
-                }
-                // empty
-                else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(
-                    child: Text('no data found'),
-                  );
-                }
-                // loading
-                else {
-                  final subCategories = snapshot.data!;
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    
-                    child: Column(
-                      children: List.generate(
-                        (subCategories.length / 7).ceil(),
-                        (setIndex) {
-                          final start = setIndex * 7;
-                          final end = (setIndex + 1) * 7;
-
-                          return Padding(
-                            padding: const EdgeInsets.all(8.9),
-                            child: SingleChildScrollView(
-                              // ✅ horizontal scroll per row
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: subCategories
-                                    .sublist(
-                                      start,
-                                      end > subCategories.length
-                                          ? subCategories.length
-                                          : end,
-                                    )
-                                    .map(
-                                      (subcategory) => SubcategoryTileWidget(
-                                        image: subcategory.image,
-                                        name: subcategory.subCategoryName,
-                                      ),
-                                    )
-                                    .toList(),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  );
-                }
-              },
-            ),
-          ),
+              label: 'store'),
+          BottomNavigationBarItem(
+              icon: Image.asset('assets/icons/cart.png', width: 25),
+              label: 'Cart'),
+          BottomNavigationBarItem(
+              icon: Image.asset('assets/icons/user.png', width: 25),
+              label: 'User'),
         ],
       ),
+      body: pages[pageIndex],
     );
   }
 }

@@ -55,9 +55,10 @@ class _CategoryItemWidgetState extends State<CategoryItemWidget> {
                   shrinkWrap: true,
                   itemCount: categories.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8),
+                    crossAxisCount: 4,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                  ),
                   itemBuilder: (context, index) {
                     final category = categories[index];
                     return InkWell(

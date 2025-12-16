@@ -15,13 +15,14 @@ class InnerHeaderWidget extends StatelessWidget {
             'assets/icons/searchBanner.jpeg',
             fit: BoxFit.cover,
             width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.20,
           ),
           Positioned(
-              left: 30,
-              top: 60,
+              left: 55,
+              top: 90,
               child: SizedBox(
                 height: 50,
-                width: 250,
+                width: 230,
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: 'Enter Text',
@@ -40,8 +41,8 @@ class InnerHeaderWidget extends StatelessWidget {
                 ),
               )),
           Positioned(
-              left: 311,
-              top: 78,
+              left: 315,
+              top: 95,
               child: Material(
                 type: MaterialType.transparency,
                 child: InkWell(
@@ -54,13 +55,15 @@ class InnerHeaderWidget extends StatelessWidget {
                     height: 31,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage('assets/icons/bell.png'))),
+                            image: AssetImage(
+                      'assets/icons/bell.png',
+                    ))),
                   ),
                 ),
               )),
           Positioned(
             left: 290,
-            top: 78,
+            top: 95,
             child: Material(
               type: MaterialType.transparency,
               child: InkWell(
@@ -75,6 +78,20 @@ class InnerHeaderWidget extends StatelessWidget {
                       image: DecorationImage(
                           image: AssetImage('assets/icons/message.png'))),
                 ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 5,
+            top: 85,
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                size: 40,
+                color: Colors.red,
               ),
             ),
           ),

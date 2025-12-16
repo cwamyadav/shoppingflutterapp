@@ -3,6 +3,7 @@ import 'package:forntend/controller/category_controller.dart';
 import 'package:forntend/controller/sub_category_controller.dart';
 import 'package:forntend/model/category.dart';
 import 'package:forntend/model/sub_category.dart';
+import 'package:forntend/view/screens/authentication_screens/detail/screen/widget/subcategory_tile_widget.dart';
 import 'package:forntend/view/screens/authentication_screens/nav_screen/widget/header_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -61,6 +62,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         child: HeaderWidget(),
       ),
       body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // left side showing list of categories,
           Expanded(
@@ -147,37 +149,25 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       _subCategories.isNotEmpty
                           ? Expanded(
                               child: GridView.builder(
-                              shrinkWrap: true,
-                              itemCount: _subCategories.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      mainAxisSpacing: 4,
-                                      crossAxisSpacing: 8),
-                              itemBuilder: (context, index) {
-                                final _subcategory = _subCategories[index];
-                                return Column(
-                                  children: [
-                                    Container(
-                                      height: 50,
-                                      width: 50,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey,
-                                          borderRadius:
-                                              BorderRadius.circular(8)),
-                                      child: Image.network(
-                                        _subcategory.image,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text(_subcategory.subCategoryName),
-                                    ),
-                                  ],
-                                );
-                              },
-                            ))
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: _subCategories.length,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                        mainAxisSpacing: 4,
+                                        crossAxisSpacing: 8,
+                                        childAspectRatio: 2 / 3),
+                                itemBuilder: (context, index) {
+                                  final _subcategory = _subCategories[index];
+
+                                  return SubcategoryTileWidget(
+                                    image: _subcategory.image,
+                                    name: _subcategory.subCategoryName,
+                                  );
+                                },
+                              ),
+                            )
                           : Padding(
                               padding: EdgeInsets.all(8),
                               child: Center(

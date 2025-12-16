@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:forntend/view/screens/authentication_screens/nav_screen/cart_screen.dart';
+import 'package:forntend/view/screens/authentication_screens/nav_screen/favorite_screen.dart';
 import 'package:forntend/view/screens/authentication_screens/nav_screen/home_screen.dart';
 import 'package:forntend/view/screens/authentication_screens/nav_screen/category_screen.dart';
+import 'package:forntend/view/screens/authentication_screens/nav_screen/store_screen.dart';
 import 'package:forntend/view/screens/authentication_screens/nav_screen/user_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -12,40 +14,53 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  int _pageIndex = 0;
   final List<Widget> _pages = [
     HomeScreen(),
+    FavoriteScreen(),
     CategoryScreen(),
+    StoreScreen(),
     CartScreen(),
     UserScreen(),
   ];
-  int _pageIndex = 0;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.purple,
-          unselectedItemColor: Colors.grey,
-          currentIndex: _pageIndex,
-          onTap: (value) {
-            setState(() {
-              _pageIndex = value;
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/home.png', width: 25),
-                label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/mart.png', width: 25),
-                label: 'Category'),
-            BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/cart.png', width: 25),
-                label: 'Cart'),
-            BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/user.png', width: 25),
-                label: 'User'),
-          ]),
+        selectedItemColor: Colors.purple,
+        unselectedItemColor: Colors.grey,
+        currentIndex: _pageIndex,
+        onTap: (value) {
+          setState(() {
+            _pageIndex = value;
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+              icon: Image.asset('assets/icons/home.png', width: 25),
+              label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Image.asset('assets/icons/love.png', width: 25),
+              label: "favroite"),
+          BottomNavigationBarItem(
+              icon: Image.asset('assets/icons/mart.png', width: 25),
+              label: 'Category'),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/icons/mart.png',
+                width: 25,
+              ),
+              label: 'store'),
+          BottomNavigationBarItem(
+              icon: Image.asset('assets/icons/cart.png', width: 25),
+              label: 'Cart'),
+          BottomNavigationBarItem(
+              icon: Image.asset('assets/icons/user.png', width: 25),
+              label: 'User'),
+        ],
+      ),
       body: _pages[_pageIndex],
     );
   }

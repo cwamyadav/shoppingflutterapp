@@ -26,6 +26,8 @@ dependencies:
   http: ^1.6.0
   flutter_dotenv: ^6.0.0
   flutter_admin_scaffold: ^1.4.0
+  shared_preferences: ^2.5.3
+  flutter_riverpod: ^2.6.1
 
 dev_dependencies:
   flutter_test:

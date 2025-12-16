@@ -9,15 +9,16 @@ class User {
   final String locality;
   final String city;
   final String token;
-  User(
-      {required this.id,
-      required this.email,
-      required this.password,
-      required this.fullname,
-      required this.state,
-      required this.city,
-      required this.locality,
-      required this.token,});
+  User({
+    required this.id,
+    required this.email,
+    required this.password,
+    required this.fullname,
+    required this.state,
+    required this.city,
+    required this.locality,
+    required this.token,
+  });
 
   // serilization: object to map format,
   Map<String, dynamic> toMap() {
@@ -29,7 +30,7 @@ class User {
       "state": state,
       "locality": locality,
       "city": city,
-      "token":token,
+      "token": token,
     };
   }
 
