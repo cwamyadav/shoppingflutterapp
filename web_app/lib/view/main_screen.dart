@@ -61,9 +61,10 @@ class _MainScreenState extends State<MainScreen> {
               child: Text(
                 'Multi vendor Admin',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               )),
           items: [
             AdminMenuItem(

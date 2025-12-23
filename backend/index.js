@@ -8,8 +8,12 @@ const categoryRouter=require('./routes/category');
 const subcategoriesRouter=require('./routes/sub_category');
 const productRouter=require('./routes/product');
 const productReviewRouter=require('./routes/product_review');
+const vendorRouter=require('./routes/vendor');
+const orderRouter=require('./routes/order');
+
 const cors=require('cors');
 require('dotenv').config();
+
 // defined the port 
 const PORT= process.env.PORT || 3000;
 
@@ -35,6 +39,8 @@ app.use(categoryRouter);
 app.use(subcategoriesRouter);
 app.use(productRouter);
 app.use(productReviewRouter);
+app.use(vendorRouter);
+app.use(orderRouter);
 //start the server and listen specific port
 app.listen(PORT, "0.0.0.0", ()=>{
     console.log(`backend server is running on port ${PORT}`);

@@ -17,23 +17,35 @@ const productSchema=mongoose.Schema({
         type: String, 
         required: true, 
     },
+    category:{
+        type:String, 
+        required:true,
+    },
+    // id
+    vendorId:{
+        type:String, 
+        required: true,
+    },
+    vendorName:{
+        type:String, 
+        required: true, 
+    },
     subCategory:{
         type: String, 
         required: true, 
     },
-    image:[{
+    images:[{
         type: String, 
         required: true, 
     }, ], 
     popular:{
-        type: Boolean, 
-        default: true, 
+        type:Boolean,
+        default:false,  
     }, 
     recommend:{
-        type: Boolean, 
-        required: true, 
-    }, 
-
+        type:Boolean, 
+        default:false,  
+    }
 
 });
 const Product=mongoose.model("Product", productSchema);

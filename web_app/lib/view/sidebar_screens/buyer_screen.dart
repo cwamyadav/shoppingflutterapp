@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BuyerScreen extends StatefulWidget {
-  static const String id = '\vendor-screen';
+  static const String id = '\buyer-screen';
  
   const BuyerScreen({super.key});
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/cart_screen.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/favorite_screen.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/home_screen.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/category_screen.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/store_screen.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/user_screen.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/cart_screen.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/favorite_screen.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/home_screen.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/category_screen.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/store_screen.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/user_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -21,9 +21,9 @@ class _MainScreenState extends State<MainScreen> {
     CategoryScreen(),
     StoreScreen(),
     CartScreen(),
-    UserScreen(),
+    AccountScreen(),
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

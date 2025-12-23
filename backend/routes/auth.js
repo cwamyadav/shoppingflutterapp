@@ -44,11 +44,34 @@ authRouter.post('/api/signin/',async (req, res)=> {
                 // remove senesetive information 
                 const {password,  ...userWithoutPassword}=findUser._doc;
                 // send the response
-                res.json({token, ...userWithoutPassword});
+                // res.json({token, ...userWithoutPassword});
+                res.json({token, user:userWithoutPassword});
             }
         }
     }catch(error){
         res.status(500).json({error:error.message});
     }
 });
+// update the user location
+
+authRouter.put('/api/users/:id', async(req,res)=>{
+    try{
+        const {id}=req.params;//extract id from the url
+        const {state,city,locality}=req.body;// extract state,city... from the body,
+        const updatedUser=await User.findByIdAndUpdate(// find state,city,locality by id and upadate
+            id,{state,city,locality},
+            {new:true},
+        );
+        if(!updatedUser){
+            return res.status(404).json({error:"user not found"});
+        }
+        else{
+            return res.status(200).json(updatedUser);
+        }
+    }catch(e){
+        res.status(500).json({error:e.message});
+    }
+})
+
+
 module.exports=authRouter;//any where used in backend

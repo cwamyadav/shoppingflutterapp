@@ -50,136 +50,137 @@ class _SubcategoryScreenState extends State<SubcategoryScreen> {
         key: _formkey,
         child: Padding(
           padding: EdgeInsets.only(left: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'SubCategories',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30),
-              ),
-              Padding(
-                padding: EdgeInsets.all(4.0),
-                child: Divider(
-                  color: Colors.grey,
-                  thickness: 1,
-                  height: 1,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'SubCategories',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30),
                 ),
-              ),
-              FutureBuilder(
-                  future: futureCategories,
-                  builder: (context, snapshot) {
-                    // waiting: rotate,
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
-                    }
-                    // errror
-                    else if (snapshot.hasError) {
-                      return Center(
-                        child: Text("Error: ${snapshot.error}"),
-                      );
-                    }
-                    // not present
-                    else if (!snapshot.hasData || snapshot.data == null) {
-                      return Center(
-                        child: Text('No Data found'),
-                      );
-                    }
-                    // show the ui
-                    else {
-                      return DropdownButton(
-                          value: selectedCategory,
-                          hint: Text('Select Category'),
-                          items: snapshot.data!.map((Category category) {
-                            return DropdownMenuItem(
-                                value: category, child: Text(category.name));
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              selectedCategory = value;
-                            });
-                            print(selectedCategory!.name);
-                          });
-                    }
-                  }),
-              Row(
-                children: [
-                  Container(
-                    height: 150,
-                    width: 150,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: _image != null
-                        ? Image.memory(_image)
-                        : Text('Category Image'),
+                Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: Divider(
+                    color: Colors.grey,
+                    thickness: 1,
+                    height: 1,
                   ),
-                  // tex field
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: SizedBox(
-                      width: 180,
-                      child: TextFormField(
-                        onChanged: (value) {
-                          subCategoryName = value;
-                        },
-                        validator: (value) {
-                          if (value!.isNotEmpty) {
-                            return null;
-                          } else {
-                            return "Please enter subCategory name";
-                          }
-                        },
-                        textAlign: TextAlign.center,
-                        decoration:
-                            InputDecoration(hintText: 'Enter SubCategory name'),
+                ),
+                FutureBuilder(
+                    future: futureCategories,
+                    builder: (context, snapshot) {
+                      // waiting: rotate,
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      }
+                      // errror
+                      else if (snapshot.hasError) {
+                        return Center(
+                          child: Text("Error: ${snapshot.error}"),
+                        );
+                      }
+                      // not present
+                      else if (!snapshot.hasData || snapshot.data == null) {
+                        return Center(
+                          child: Text('No Data found'),
+                        );
+                      }
+                      else {
+                        return DropdownButton(
+                            value: selectedCategory,
+                            hint: Text('Select Category'),
+                            items: snapshot.data!.map((Category category) {
+                              return DropdownMenuItem(
+                                  value: category, child: Text(category.name));
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                selectedCategory = value;
+                              });
+                              print(selectedCategory!.name);
+                            });
+                      }
+                    }),
+                Row(
+                  children: [
+                    Container(
+                      height: 150,
+                      width: 150,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: _image != null
+                          ? Image.memory(_image)
+                          : Text('Category Image'),
+                    ),
+                    // tex field
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: SizedBox(
+                        width: 180,
+                        child: TextFormField(
+                          onChanged: (value) {
+                            subCategoryName = value;
+                          },
+                          validator: (value) {
+                            if (value!.isNotEmpty) {
+                              return null;
+                            } else {
+                              return "Please enter subCategory name";
+                            }
+                          },
+                          textAlign: TextAlign.center,
+                          decoration:
+                              InputDecoration(hintText: 'Enter SubCategory name'),
+                        ),
                       ),
                     ),
-                  ),
-                  // save button
-                  ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all(Colors.blue)),
-                      onPressed: () async {
-                        if (_formkey.currentState!.validate()) {
-                          _subCategoryController.uploadSubCategory(
-                            categoryId: selectedCategory!.id,
-                            categoryName: selectedCategory!.name,
-                            subCategoryName: subCategoryName,
-                            subCategoyimage: _image,
-                            context: context,
-                          );
-                        }
-                        setState(() {
-                          _formkey.currentState!.reset();
-                          _image = null;
-                        });
-                      },
-                      child: Text('save')),
-                ],
-              ),
-              // button pickedimage,
-              Padding(
-                padding: EdgeInsets.all(4),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(Colors.blue)),
-                  onPressed: () {
-                    pickSubCategoryImage();
-                  },
-                  child: Text('picked image'),
+                    // save button
+                    ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                WidgetStateProperty.all(Colors.blue)),
+                        onPressed: () async {
+                          if (_formkey.currentState!.validate()) {
+                            _subCategoryController.uploadSubCategory(
+                              categoryId: selectedCategory!.id,
+                              categoryName: selectedCategory!.name,
+                              subCategoryName: subCategoryName,
+                              subCategoyimage: _image,
+                              context: context,
+                            );
+                          }
+                          setState(() {
+                            _formkey.currentState!.reset();
+                            _image = null;
+                          });
+                        },
+                        child: Text('save')),
+                  ],
                 ),
-              ),
-              Divider(
-                thickness: 1,
-                color: Colors.red,
-              ),
-              SubCategoryWidget(),
-            ],
+                // button pickedimage,
+                Padding(
+                  padding: EdgeInsets.all(4),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all(Colors.blue)),
+                    onPressed: () {
+                      pickSubCategoryImage();
+                    },
+                    child: Text('picked image'),
+                  ),
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Colors.red,
+                ),
+                SubCategoryWidget(),
+              ],
+            ),
           ),
         ),
       ),

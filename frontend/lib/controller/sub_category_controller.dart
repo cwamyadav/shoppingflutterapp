@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:forntend/global_varriables.dart';
-import 'package:forntend/model/sub_category.dart';
+import 'package:frontend/global_varriables.dart';
+import 'package:frontend/model/sub_category.dart';
 import 'package:http/http.dart' as http;
 
 class SubCategoryController {

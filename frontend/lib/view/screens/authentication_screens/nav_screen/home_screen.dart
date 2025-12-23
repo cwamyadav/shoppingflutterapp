@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/widget/banner_widget.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/widget/category_item_widget.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/widget/header_widget.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/widget/reusable_text_widget.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/widget/banner_widget.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/widget/category_item_widget.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/widget/header_widget.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/widget/popular_product_widget.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/widget/reusable_text_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,8 +23,9 @@ class _MyWidgetState extends State<HomeScreen> {
           children: [
             HeaderWidget(),
             BannerWidget(),
-            ReusableTextWidget(title: 'Categories', subtitle: 'view all'),
             CategoryItemWidget(),
+            ReusableTextWidget(title: 'Popular Products', subtitle: 'View all'),
+            PopularProductWidget(),
           ],
         ),
       ),

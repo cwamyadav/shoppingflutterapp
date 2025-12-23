@@ -1,12 +1,21 @@
-// import mongoose(library of mongoose)
+// steps for creating the model
+
 const mongoose=require('mongoose');
-//create the schema(how to data organise overall structure)
-const UserSchema=mongoose.Schema({
-    // email
-    email:{
+// import mongoose 
+
+// create schema
+const vendorSchema=mongoose.Schema({
+    // name
+    fullname:{
+        type: String, 
+        required: true, 
+        trim: true, 
+    },
+     email:{
         type: String, 
         required: true, 
         trim: true,
+        lowercase:true,
         validate:{
             validator:(value)=>{
             const result=/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -14,12 +23,6 @@ const UserSchema=mongoose.Schema({
             },
             message: 'enter a valid email'
         }
-    },
-    // name
-    fullname:{
-        type: String, 
-        required: true, 
-        trim: true, 
     },
     // state(optional)
     state:{
@@ -31,12 +34,16 @@ const UserSchema=mongoose.Schema({
         type: String, 
         default:""
     },
+    role:{
+        type: String, 
+        default:"vendor"
+    },
     city:{
         type: String, 
         default: ""
     }, 
     // password
-    password:{
+     password:{
         type: String, 
         required: true, 
         validate: {
@@ -44,9 +51,9 @@ const UserSchema=mongoose.Schema({
         message: 'password must be at least 8 characters'
         }
     },
-
 });
-//schema convert into models
-const User =mongoose.model("User", UserSchema);
-//make such way model access whole inside node.js project
-module.exports=User;
+// create  model
+const Vendor=mongoose.model("Vendor", vendorSchema);
+// export whole node js project 
+module.exports=Vendor;
+

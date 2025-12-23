@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:forntend/model/category.dart';
-import 'package:forntend/view/screens/authentication_screens/detail/screen/widget/inner_content_widget.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/cart_screen.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/category_screen.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/favorite_screen.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/store_screen.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/user_screen.dart';
+import 'package:frontend/model/category.dart';
+import 'package:frontend/view/screens/authentication_screens/detail/screen/widget/inner_content_widget.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/cart_screen.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/category_screen.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/favorite_screen.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/store_screen.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/user_screen.dart';
 
 class InnerCategoryScreen extends StatefulWidget {
   final Category category;
@@ -27,7 +27,7 @@ class _InnerCategoryScreenState extends State<InnerCategoryScreen> {
       CategoryScreen(),
       StoreScreen(),
       CartScreen(),
-      UserScreen(),
+      AccountScreen(),
     ];
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(

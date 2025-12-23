@@ -71,83 +71,79 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ),
               ),
               // category image, categoryname, cancel, save buton
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          height: 150,
-                          width: 150,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: _image != null
-                              ? Image.memory(_image)
-                              : Text('Category Image'),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        ElevatedButton(
-                            onPressed: () {
-                              pickImage();
-                            },
-                            child: Text('Pick Image')),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: SizedBox(
-                        width: 180,
-                        child: TextFormField(
-                          onChanged: (value){
-                            categoryName = value;
-                          },
-                          validator: (value) {
-                            if (value!.isNotEmpty) {
-                              return null;
-                            } else {
-                              return "Please enter category name";
-                            }
-                          },
-                          textAlign: TextAlign.center,
-                          decoration:
-                              InputDecoration(hintText: 'Enter Category name'),
-                        ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        height: 150,
+                        width: 150,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: _image != null
+                            ? Image.memory(_image)
+                            : Text('Category Image'),
                       ),
-                    ),
-                    TextButton(onPressed: () {}, child: Text('Cancel')),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    // save button
-                    ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all(Colors.deepPurple),
-                          foregroundColor:
-                              WidgetStateProperty.all(Colors.white),
-                        ),
-                        onPressed: () {
-                          // print(_categoryText.text);
-                          if (_formkey.currentState!.validate()) {
-                            _categoryController.uploadCategory(
-                              pickedImage: _image,
-                              pickedBanner: _bannerImage,
-                              name: categoryName,
-                              context: context,
-                            );
+                      SizedBox(
+                        height: 5,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            pickImage();
+                          },
+                          child: Text('Pick Image')),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: SizedBox(
+                      width: 180,
+                      child: TextFormField(
+                        onChanged: (value) {
+                          categoryName = value;
+                        },
+                        validator: (value) {
+                          if (value!.isNotEmpty) {
+                            return null;
+                          } else {
+                            return "Please enter category name";
                           }
                         },
-                        child: Text('save')),
-                  ],
-                ),
+                        textAlign: TextAlign.center,
+                        decoration:
+                            InputDecoration(hintText: 'Enter Category name'),
+                      ),
+                    ),
+                  ),
+                  TextButton(onPressed: () {}, child: Text('Cancel')),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  // save button
+                  ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            WidgetStateProperty.all(Colors.deepPurple),
+                        foregroundColor: WidgetStateProperty.all(Colors.white),
+                      ),
+                      onPressed: () {
+                        // print(_categoryText.text);
+                        if (_formkey.currentState!.validate()) {
+                          _categoryController.uploadCategory(
+                            pickedImage: _image,
+                            pickedBanner: _bannerImage,
+                            name: categoryName,
+                            context: context,
+                          );
+                        }
+                      },
+                      child: Text('save')),
+                ],
               ),
 
               Padding(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:forntend/controller/banner_controller.dart';
-import 'package:forntend/model/banner.dart';
+import 'package:frontend/controller/banner_controller.dart';
+import 'package:frontend/model/banner.dart';
 
 class BannerWidget extends StatefulWidget {
   const BannerWidget({super.key});

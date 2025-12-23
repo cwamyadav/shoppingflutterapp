@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:forntend/controller/category_controller.dart';
-import 'package:forntend/model/category.dart';
-import 'package:forntend/view/screens/authentication_screens/detail/screen/inner_category_screen.dart';
+import 'package:frontend/controller/category_controller.dart';
+import 'package:frontend/model/category.dart';
+import 'package:frontend/view/screens/authentication_screens/detail/screen/inner_category_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CategoryItemWidget extends StatefulWidget {

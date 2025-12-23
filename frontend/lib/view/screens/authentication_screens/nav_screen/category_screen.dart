@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:forntend/controller/category_controller.dart';
-import 'package:forntend/controller/sub_category_controller.dart';
-import 'package:forntend/model/category.dart';
-import 'package:forntend/model/sub_category.dart';
-import 'package:forntend/view/screens/authentication_screens/detail/screen/widget/subcategory_tile_widget.dart';
-import 'package:forntend/view/screens/authentication_screens/nav_screen/widget/header_widget.dart';
+import 'package:frontend/controller/category_controller.dart';
+import 'package:frontend/controller/sub_category_controller.dart';
+import 'package:frontend/model/category.dart';
+import 'package:frontend/model/sub_category.dart';
+import 'package:frontend/view/screens/authentication_screens/detail/screen/widget/subcategory_tile_widget.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/widget/header_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CategoryScreen extends StatefulWidget {

@@ -49,15 +49,17 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                 ),
                 itemBuilder: (context, index) {
                   final category = categories[index];
-                  return Column(children: [
-                    Image.network(
-                    category.image,
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.cover,
-                  ), 
-                  Text(category.name), 
-                  ],);
+                  return Column(
+                    children: [
+                      Image.network(
+                        category.image,
+                        height: 100,
+                        width: 100,
+                        fit: BoxFit.cover,
+                      ),
+                      Text(category.name),
+                    ],
+                  );
                 });
           }
         });
