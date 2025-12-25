@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/model/product.dart';
 import 'package:frontend/provider/cart_provider.dart';
 import 'package:frontend/services/manage_http_response.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/cart_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductDetailScreen extends ConsumerStatefulWidget {
@@ -16,7 +17,9 @@ class ProductDetailScreen extends ConsumerStatefulWidget {
 class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    final _cartProvider = ref.read(cartProvider.notifier);
+    final cartProviderData = ref.read(cartProvider.notifier);
+    final cartData = ref.watch(cartProvider);
+    final isInCart = cartData.containsKey(widget.product.id);
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -144,26 +147,35 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
         bottomSheet: Padding(
             padding: EdgeInsets.all(8),
             child: InkWell(
-              onTap: () {
-                _cartProvider.addProductToCart(
-                  productName: widget.product.productName,
-                  productPrice: widget.product.productPrice,
-                  category: widget.product.category,
-                  image: widget.product.images,
-                  vendorId: widget.product.vendorId,
-                  quantity: 1,
-                  productQuantity: widget.product.quantity,
-                  productId: widget.product.id,
-                  desc: widget.product.desc,
-                  fullName: widget.product.vendorName,
-                );
-                showSnackBar(context, widget.product.productName);
-              },
+              onTap: isInCart
+                  ? () {
+                      showSnackBar(context, 'Already add in cart');
+                    }
+                  : () {
+                      cartProviderData.addProductToCart(
+                        productName: widget.product.productName,
+                        productPrice: widget.product.productPrice,
+                        category: widget.product.category,
+                        image: widget.product.images,
+                        vendorId: widget.product.vendorId,
+                        quantity: 1,
+                        productQuantity: widget.product.quantity,
+                        productId: widget.product.id,
+                        desc: widget.product.desc,
+                        fullName: widget.product.vendorName,
+                      );
+
+                      showSnackBar(context, widget.product.productName);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CartScreen()));
+                    },
               child: Container(
                 height: 50,
                 width: 300,
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: isInCart ? Colors.grey : Colors.blue,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 alignment: Alignment.center,

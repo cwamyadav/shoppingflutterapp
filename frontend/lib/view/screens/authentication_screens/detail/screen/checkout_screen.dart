@@ -10,7 +10,7 @@ class CheckOutScreen extends ConsumerStatefulWidget {
   const CheckOutScreen({super.key});
 
   @override
-  _CheckOutScreenState createState() => _CheckOutScreenState();
+  ConsumerState<CheckOutScreen> createState() => _CheckOutScreenState();
 }
 
 class _CheckOutScreenState extends ConsumerState<CheckOutScreen> {
@@ -77,18 +77,27 @@ class _CheckOutScreenState extends ConsumerState<CheckOutScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Align(
+                                      Align(
                                         alignment: Alignment.centerLeft,
                                         child: SizedBox(
                                           width: 114,
-                                          child: Text(
-                                            'Add Adress',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                              height: 1.1,
-                                            ),
-                                          ),
+                                          child: user!.state.isNotEmpty
+                                              ? Text(
+                                                  'address',
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold,
+                                                    height: 1.1,
+                                                  ),
+                                                )
+                                              : Text(
+                                                  'Add Adress',
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.bold,
+                                                    height: 1.1,
+                                                  ),
+                                                ),
                                         ),
                                       ),
                                       const SizedBox(
@@ -96,7 +105,7 @@ class _CheckOutScreenState extends ConsumerState<CheckOutScreen> {
                                       ),
                                       Align(
                                           alignment: Alignment.centerLeft,
-                                          child: user!.state.isNotEmpty
+                                          child: user.state.isNotEmpty
                                               ? Text(
                                                   user.state,
                                                   style: GoogleFonts.lato(

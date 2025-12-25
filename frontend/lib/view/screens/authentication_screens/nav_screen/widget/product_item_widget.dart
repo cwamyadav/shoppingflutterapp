@@ -87,7 +87,15 @@ class ProductItemWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.green,
                 ),
-              )
+              ),
+              Text(
+                product.productPrice.toStringAsFixed(2),
+                style: GoogleFonts.quicksand(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+              ),
             ],
           )),
     );

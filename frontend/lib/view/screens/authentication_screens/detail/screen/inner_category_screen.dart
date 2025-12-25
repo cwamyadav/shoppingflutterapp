@@ -5,7 +5,7 @@ import 'package:frontend/view/screens/authentication_screens/nav_screen/cart_scr
 import 'package:frontend/view/screens/authentication_screens/nav_screen/category_screen.dart';
 import 'package:frontend/view/screens/authentication_screens/nav_screen/favorite_screen.dart';
 import 'package:frontend/view/screens/authentication_screens/nav_screen/store_screen.dart';
-import 'package:frontend/view/screens/authentication_screens/nav_screen/user_screen.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/account_screen.dart';
 
 class InnerCategoryScreen extends StatefulWidget {
   final Category category;

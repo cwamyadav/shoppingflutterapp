@@ -1,24 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/controller/banner_controller.dart';
 import 'package:frontend/model/banner.dart';
+import 'package:frontend/provider/banner_provider.dart';
 
-class BannerWidget extends StatefulWidget {
+class BannerWidget extends ConsumerStatefulWidget {
   const BannerWidget({super.key});
 
   @override
-  State<BannerWidget> createState() => _BannerWidgetState();
+  ConsumerState<BannerWidget> createState() => _BannerWidgetState();
 }
 
-class _BannerWidgetState extends State<BannerWidget> {
+class _BannerWidgetState extends ConsumerState<BannerWidget> {
   late Future<List<BannerModel>> futurebanners;
+
+  Future<void> _fetchBanners() async {
+    final BannerController bannerController = BannerController();
+    try {
+      final banners = await bannerController.loadbanners();
+      ref.read(bannerProvider.notifier).setBannerModel(banners);
+      ref.read(bannerProvider);
+    } catch (e) {
+      print('$e');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    futurebanners = BannerController().loadbanners();
+    _fetchBanners();
   }
 
   @override
   Widget build(BuildContext context) {
+    final banners = ref.watch(bannerProvider);
     return Padding(
       padding: EdgeInsets.all(8),
       child: Container(
@@ -29,45 +44,19 @@ class _BannerWidgetState extends State<BannerWidget> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: FutureBuilder(
-            future: futurebanners,
-            builder: (context, snapshot) {
-              // waiting
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              // error
-              else if (snapshot.hasError) {
-                return Center(
-                  child: Text('error:${snapshot.error}'),
-                );
-              }
-              // data not found: error
-              else if (!snapshot.hasData || snapshot.data == null) {
-                return Center(
-                  child: Text('No data found'),
-                );
-              }
-              // return data
-              else {
-                final banners = snapshot.data!;
-                return PageView.builder(
-                  itemCount: banners.length,
-                  itemBuilder: (context, index) {
-                    final banner = banners[index];
-                    return Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Image.network(
-                        banner.image,
-                        fit: BoxFit.cover,
-                      ),
-                    );
-                  },
-                );
-              }
-            }),
+        child: PageView.builder(
+          itemCount: banners.length,
+          itemBuilder: (context, index) {
+            final banner = banners[index];
+            return Padding(
+              padding: EdgeInsets.all(8),
+              child: Image.network(
+                banner.image,
+                fit: BoxFit.cover,
+              ),
+            );
+          },
+        ),
       ),
     );
   }

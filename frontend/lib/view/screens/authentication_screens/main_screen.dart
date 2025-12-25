@@ -4,7 +4,7 @@ import 'package:frontend/view/screens/authentication_screens/nav_screen/favorite
 import 'package:frontend/view/screens/authentication_screens/nav_screen/home_screen.dart';
 import 'package:frontend/view/screens/authentication_screens/nav_screen/category_screen.dart';
 import 'package:frontend/view/screens/authentication_screens/nav_screen/store_screen.dart';
-import 'package:frontend/view/screens/authentication_screens/nav_screen/user_screen.dart';
+import 'package:frontend/view/screens/authentication_screens/nav_screen/account_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

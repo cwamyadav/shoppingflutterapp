@@ -275,12 +275,14 @@ class _CartScreenState extends ConsumerState<CartScreen> {
             Align(
               alignment: Alignment(.83, -1),
               child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CheckOutScreen()));
-                },
+                onTap: totalAmount == 0
+                    ? null
+                    : () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CheckOutScreen()));
+                      },
                 child: Container(
                   width: 166,
                   height: 71,
