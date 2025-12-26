@@ -14,7 +14,7 @@ class CheckOutScreen extends ConsumerStatefulWidget {
 }
 
 class _CheckOutScreenState extends ConsumerState<CheckOutScreen> {
-  String selectPaymentMethod = 'stripe';
+  String selectPaymentMethod = 'cashOnDelivery';
   final OrderController _orderController = OrderController();
   @override
   Widget build(BuildContext context) {
@@ -341,7 +341,7 @@ class _CheckOutScreenState extends ConsumerState<CheckOutScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                value: 'cash on delievery',
+                value: 'cashOnDelivery',
                 groupValue: selectPaymentMethod,
                 onChanged: (String? value) {
                   setState(() {
@@ -409,7 +409,7 @@ class _CheckOutScreenState extends ConsumerState<CheckOutScreen> {
                   alignment: Alignment.center,
                   margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Text(
-                    selectPaymentMethod == 'stripe' ? 'Place Order' : 'pay now',
+                    selectPaymentMethod == 'stripe' ? 'pay now' : 'Place Order',
                     style: GoogleFonts.montserrat(
                       color: Colors.white,
                       fontSize: 18,

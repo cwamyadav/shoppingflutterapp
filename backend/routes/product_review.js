@@ -6,8 +6,8 @@
     // create api
     ReviewRatingRouter.post('/api/prodcut-review/', async(req, res)=>{
         try{
-            const{buyerId,email,fullname,productId,rating,review }=req.body;
-            const reviews= new ProductReview({buyerId,email,fullname,productId,rating,review });
+            const{buyerId,email,fullname,productId,rating,review}=req.body;
+            const reviews= new ProductReview({buyerId,email,fullname,productId,rating,review});
             // save the mongodb
         await reviews.save();
             // return the product 

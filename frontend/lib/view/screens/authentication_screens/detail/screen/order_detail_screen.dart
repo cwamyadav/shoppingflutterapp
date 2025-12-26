@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/controller/order_controller.dart';
 import 'package:frontend/model/order.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OrderDetailScreen extends StatefulWidget {
   final Order order;
   const OrderDetailScreen({required this.order, super.key});
-
   @override
   State<OrderDetailScreen> createState() => _OrderDetailScreenState();
 }
 
 class _OrderDetailScreenState extends State<OrderDetailScreen> {
+  final OrderController orderController = OrderController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +43,6 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   ),
 
                   const SizedBox(width: 12),
-
-                  // 🔹 Product Details
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,28 +56,21 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-
                         const SizedBox(height: 6),
-
                         Text(
                           widget.order.category,
                           style: TextStyle(
                             color: Colors.grey.shade600,
                           ),
                         ),
-
                         const SizedBox(height: 8),
-
                         Text(
                           '₹${widget.order.productPrice}',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-
                         const SizedBox(height: 8),
-
-                        // 🔹 Order Status
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 10,
@@ -108,7 +100,12 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       ],
                     ),
                   ),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.delete))
+                  IconButton(
+                      onPressed: () {
+                        orderController.deleteOrder(
+                            id: widget.order.id, context: context);
+                      },
+                      icon: Icon(Icons.delete))
                 ],
               ),
             ),
@@ -137,9 +134,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                     const SizedBox(height: 6),
-
                     Text(
                       '${widget.order.state} ${widget.order.city} ${widget.order.locality}',
                       style: TextStyle(
@@ -147,7 +142,6 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                           fontSize: 15,
                           fontWeight: FontWeight.w500),
                     ),
-
                     const SizedBox(height: 8),
                     Text(
                       'To: ${widget.order.fullName}',
@@ -165,10 +159,9 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       'Order Id: ${widget.order.id}',
                       style: TextStyle(
                         color: Colors.grey.shade600,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
-
                     Row(
                       children: [
                         TextButton(
@@ -183,9 +176,10 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                         TextButton(
                           onPressed: () {},
                           child: Text(
-                            'Cancel?',
+                            'Cancel',
                             style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.bold,
+                              color: Colors.red,
                             ),
                           ),
                         ),

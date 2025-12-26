@@ -19,10 +19,8 @@ class _CartScreenState extends ConsumerState<CartScreen> {
     final _cartProvider = ref.read(cartProvider.notifier);
     final totalAmount = ref.read(cartProvider.notifier).calculateTotalAmount();
     return Scaffold(
-      // appbar --------->
-      //size*20, 118 height, positions(20, 20, 12 radius),
-      //51,
-      //
+
+      
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(
           MediaQuery.of(context).size.height * 20,

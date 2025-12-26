@@ -55,7 +55,7 @@ const orderSchema=mongoose.Schema({
     },
     delivered:{
         type:Boolean,
-        default:true,
+        default:false,
     },
     createdAt:{
         type:Number,

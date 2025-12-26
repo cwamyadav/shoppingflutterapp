@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class Order {
-  final String id;
+  final String id;// this id for a particular product, 
   final String fullName;
   final String email;
   final String state;

@@ -69,6 +69,7 @@ OrderRouter.get('/api/orders/:buyerId', async(req,res)=>{
 
 
 // Delete the id 
+// this is the product id which product delete
 OrderRouter.delete('/api/orders/:id', async(req,res)=>{
     try{
         // extract the parameter form the request 
@@ -108,5 +109,41 @@ OrderRouter.get('/api/orders/vendors/:vendorId', async(req,res)=>{
     }
 });
 
+OrderRouter.patch('/api/orders/:id/delivered', async(req, res)=>{
+    try{
+        const{id}=req.params;
+        const updatedOrder= await Order.findByIdAndUpdate(id, 
+            {delivered:true,processing:false }, 
+            {new:true}
+        );
+        if(!updatedOrder){
+            return res.status(404).json({msg:"order not found"});
+        }
+        else{
+            return res.status(200).json({updatedOrder});
+        }
+    }catch(e){
+        return res.status(500).json({error:e.message});
+    }
+})
+
+
+OrderRouter.patch('/api/orders/:id/processing', async(req, res)=>{
+    try{
+        const{id}=req.params;
+        const updatedOrder= await Order.findByIdAndUpdate(id, 
+            {processing:false,delivered:false}, 
+            {new:true}
+        );
+        if(!updatedOrder){
+            return res.status(404).json({msg:"order cancel"});
+        }
+        else{
+            return res.status(200).json({updatedOrder});
+        }
+    }catch(e){
+        return res.status(500).json({error:e.message});
+    }
+})
 
 module.exports=OrderRouter;
