@@ -1,5 +1,7 @@
+import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/controller/order_controller.dart';
+import 'package:frontend/controller/product_review_controller.dart';
 import 'package:frontend/model/order.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,6 +14,12 @@ class OrderDetailScreen extends StatefulWidget {
 
 class _OrderDetailScreenState extends State<OrderDetailScreen> {
   final OrderController orderController = OrderController();
+
+  final ProductReviewController _productReviewController =
+      ProductReviewController();
+
+  final TextEditingController _reviewController = TextEditingController();
+  double rating = 0.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +39,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 🔹 Product Image
+                  //Product Image
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(
@@ -162,29 +170,86 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    Row(
-                      children: [
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Mark as Delivered?',
-                            style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Cancel',
-                            style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
+
+                    widget.order.delivered == true
+                        ? TextButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text('Leave a review'),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          TextFormField(
+                                            controller: _reviewController,
+                                            decoration: InputDecoration(
+                                                labelText: 'your review'),
+                                          ),
+                                          RatingBar(
+                                            filledIcon: Icons.star,
+                                            emptyIcon: Icons.star_border,
+                                            onRatingChanged: (value) {
+                                              rating = value;
+                                            },
+                                            initialRating: 3,
+                                            maxRating: 5,
+                                          ),
+                                        ],
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              final review =
+                                                  _reviewController.text;
+                                              _productReviewController
+                                                  .uploadReview(
+                                                buyerId: widget.order.buyerId,
+                                                email: widget.order.email,
+                                                fullname: widget.order.fullName,
+                                                productId: widget.order.id,
+                                                rating: rating,
+                                                review: review,
+                                                context: context,
+                                              );
+                                            },
+                                            child: Text('submit')),
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: Text(
+                              'Leave a review',
+                              style: GoogleFonts.montserrat(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ))
+                        : widget.order.processing == true
+                            ? Row(
+                                children: [
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      'Mark as Delivered?',
+                                      style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      'Cancel',
+                                      style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : SizedBox(),
                   ],
                 ),
               ),

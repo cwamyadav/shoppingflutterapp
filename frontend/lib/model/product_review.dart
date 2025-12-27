@@ -7,20 +7,22 @@ class ProductReview {
   final String email;
   final String fullname;
   final String productId;
-  final String rating;
+  final double rating;
   final String review;
 
-  ProductReview(
-      {required this.id,
-      required this.buyerId,
-      required this.email,
-      required this.fullname,
-      required this.productId,
-      required this.rating,
-      required this.review});
+  ProductReview({
+    required this.id,
+    required this.buyerId,
+    required this.email,
+    required this.fullname,
+    required this.productId,
+    required this.rating,
+    required this.review,
+  });
 // object to map
   Map<String, dynamic> tomap() {
     return <String, dynamic>{
+      "id": id,
       "buyerId": buyerId,
       "email": email,
       "fullname": fullname,
@@ -41,11 +43,10 @@ class ProductReview {
         email: map["email"] as String,
         fullname: map["fullname"] as String,
         productId: map["productId"] as String,
-        rating: map["rating"] as String,
+        rating: map["rating"] as double,
         review: map["review"] as String);
   }
 
   factory ProductReview.fromJson(String source) =>
       ProductReview.fromMap(json.decode(source) as Map<String, dynamic>);
 }
-

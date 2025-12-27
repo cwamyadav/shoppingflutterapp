@@ -6,7 +6,7 @@ class Favorite {
   final String category;
   final List<String> image;
   final String vendorId;
-  int quantity;
+   int quantity;
   final int productQuantity;
   final String productId;
   final String desc;

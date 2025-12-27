@@ -3,7 +3,7 @@ import 'package:frontend/model/cart.dart';
 
 // state notifier manage the state
 // here : state notifier mange a map where key String, and value is Cart,
-class CartNotifier extends StateNotifier<Map<String, Cart>> {
+class CartNotifier extends StateNotifier<Map<String, Favorite>> {
   // at initial time inside map(state)is empty( cart is empty)
   CartNotifier() : super({});
   // method for add the product into cart
@@ -24,7 +24,7 @@ class CartNotifier extends StateNotifier<Map<String, Cart>> {
       // copy that and extends onely quantity,
       state = {
         ...state, // copy all previous item
-        productId: Cart(
+        productId: Favorite(
           productName: state[productId]!.productName,
           productPrice: state[productId]!.productPrice,
           category: state[productId]!.category,
@@ -41,7 +41,7 @@ class CartNotifier extends StateNotifier<Map<String, Cart>> {
       // if not avaialbe create a cart object and
       state = {
         ...state,
-        productId: Cart(
+        productId: Favorite(
           productName: productName,
           productPrice: productPrice,
           category: category,
@@ -90,8 +90,8 @@ class CartNotifier extends StateNotifier<Map<String, Cart>> {
     return totalamount;
   }
 
-  Map<String, Cart> get getCartItems => state;
+  Map<String, Favorite> get getCartItems => state;
 }
 
-final cartProvider = StateNotifierProvider<CartNotifier, Map<String, Cart>>(
+final cartProvider = StateNotifierProvider<CartNotifier, Map<String, Favorite>>(
     (ref) => CartNotifier());

@@ -115,6 +115,26 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
+            /// Totalrating,star,average rating
+            widget.product.averageRating == 0
+                ? Text('')
+                : Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                      ),
+                      SizedBox(
+                        width: 3,
+                      ),
+                      Text(widget.product.averageRating.toStringAsFixed(2)),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Text("(${widget.product.totalRatings.toString()})"),
+                    ],
+                  ),
             // about
             Text(
               'about',

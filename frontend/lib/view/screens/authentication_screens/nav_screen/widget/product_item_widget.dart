@@ -42,7 +42,7 @@ class ProductItemWidget extends StatelessWidget {
                       width: 170,
                       fit: BoxFit.cover,
                     ),
-                    Positioned(
+                    Positioned( 
                       top: 15,
                       right: 2,
                       child: Image.asset(
@@ -77,6 +77,26 @@ class ProductItemWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              product.averageRating == 0
+                  ? SizedBox()
+                  : Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                          size: 12,
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          product.averageRating.toStringAsFixed(1),
+                          style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
               SizedBox(
                 height: 5,
               ),

@@ -25,7 +25,15 @@ const ratingReviewSchema=mongoose.Schema({
     review:{
         type: String, 
         required:true,
-    }
+    }, 
+    averageRating:{
+        type:Number, 
+        default:0, 
+    },
+    totalRatings:{
+        type:Number, 
+        default:0,
+    },
 
 });
 // create model 
